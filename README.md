@@ -68,43 +68,43 @@
 
 Controller
 
-AccessibitiesController方法
-resetAccessibitiesStatus  重置权限状态
-getAccessibitiesByID 根据id查看权限
-deleteAccessibitiesStatus  删除权限
-getAccountByInterfaceId 根据接口查看使用的用户
-suspendAccessibitiesStatus 暂缓权限状态
-addAccessibities 新增一条权限
-getAccessibities 查看权限信息
+    AccessibitiesController方法
+		resetAccessibitiesStatus  重置权限状态
+		getAccessibitiesByID 根据id查看权限
+		deleteAccessibitiesStatus  删除权限
+		getAccountByInterfaceId 根据接口查看使用的用户
+		suspendAccessibitiesStatus 暂缓权限状态
+		addAccessibities 新增一条权限
+		getAccessibities 查看权限信息
 
-2、AccountController方法
-getAccountByName 根据用户名查看用户信息
-getAccountById 根据id获取用户信息
-resetKey 重置appkey、secretkey
-createAccount 新建用户
-getAllAccount 获取所有用户信息
-deleteAccountByName 根据用户名删除用户
+    AccountController方法
+		getAccountByName 根据用户名查看用户信息
+		getAccountById 根据id获取用户信息
+		resetKey 重置appkey、secretkey
+		createAccount 新建用户
+		getAllAccount 获取所有用户信息
+		deleteAccountByName 根据用户名删除用户
 
-3、DbController方法
-created  创建数据库表
-getDbInfo 查看数据库信息
+    DbController方法
+		created  创建数据库表
+		getDbInfo 查看数据库信息
 
-4、InterfaceController方法
-checkInterface 判断访问接口是否有权限
-updateInterfaceById 根据id修改接口信息
-searchInterfaceByTable 根据表名称看接口信息
-getInterface 查看所有接口信息
-getInterfaceByID 根据id查看接口信息
-addInterface 新增接口
-deleteInterface 删除接口
+    InterfaceController方法
+		checkInterface 判断访问接口是否有权限
+		updateInterfaceById 根据id修改接口信息
+		searchInterfaceByTable 根据表名称看接口信息
+		getInterface 查看所有接口信息
+		getInterfaceByID 根据id查看接口信息
+		addInterface 新增接口
+		deleteInterface 删除接口
 
-5、TableInfoController方法
-getTableInfoByName 根据表名查看表信息
-getTableInfoById 根据id查看表信息 
-suspendTableInfo修改表的状态成暂缓
-addTableInfo 新增表信息
-resetTableInfo 重置表的状态
-deleteTableInfo 删除表信息
+    TableInfoController方法
+		getTableInfoByName 根据表名查看表信息
+		getTableInfoById 根据id查看表信息 
+		suspendTableInfo修改表的状态成暂缓
+		addTableInfo 新增表信息
+		resetTableInfo 重置表的状态
+		deleteTableInfo 删除表信息
 
 测试用例：
 AccountController：
@@ -124,166 +124,165 @@ AccountController：
 	 	}
 	 	不存在zhangsan返回false
 
-	3、 @Test
-	 public void getAccountByName1() {
-		 String res = restTemplate.getForObject("http://192.168.1.123:8082/account/*eoro=d", String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-用户名不符合，返回 Invalid Account Name: 5~20 digit and alphabet only
+    @Test
+	 	public void getAccountByName1() {
+	 			String res = restTemplate.getForObject("http://192.168.1.123:8082/account/*eoro=d", String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	用户名不符合，返回 Invalid Account Name: 5~20 digit and alphabet only
 
 二、getAccountById 根据id获取用户信息
-	  @Test
-	1、public void getAccessibitiesInfo() {
-		String res = restTemplate.getForObject("http://localhost:8082/account", String.class);
-		assertThat(res, containsString("OK"));
-	}
 
-有数据返回true
-没有数据返回false
+    @Test
+	 	public void getAccessibitiesInfo() {
+	 			String res = restTemplate.getForObject("http://localhost:8082/account", String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	有数据返回true
+	 	没有数据返回false
 
 三、resetKey 重置appkey、secretkey
-1、//重置appkey、sercurtkey
-		 @Test
-	public void resetkey() {
-		Object obj = "{\"name\":\"zmcdhr\"}";
-		String res = restTemplate.postForObject("http://192.168.1.123:8082/account/zhu/resetkey", obj, String.class);
-		assertThat(res, containsString("OK"));
-	}
-修改成功返回true
 
-2、	public void resetkey() {
-		Object obj = "{\"name\":\"zmcdhr\"}";
-		String res = restTemplate.postForObject("http://192.168.1.123:8082/account/zmvla/resetkey", obj, String.class);
-		assertThat(res, containsString("OK"));
-	}
-返回false，没有这个用户
+    @Test
+	 	public void resetkey() {
+	 			Object obj = "{\"name\":\"zmcdhr\"}";
+	 			String res = restTemplate.postForObject("http://192.168.1.123:8082/account/zhu/resetkey", obj, String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	修改成功返回true
 
-
+    @Test
+	 	public void resetkey() {
+	 			Object obj = "{\"name\":\"zmcdhr\"}";
+	 			String res = restTemplate.postForObject("http://192.168.1.123:8082/account/zmvla/resetkey", obj, String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	返回false，没有这个用户
 
 四、createAccount 新建用户
 
-1、	// 创建用户
-	 @Test
-	public void createAccount() {
-		Object obj = "{\"name\":\"zmcdhr\",\"ext1\":\"1\"}";
-		String res = restTemplate.postForObject("http://192.168.1.123:8082/account", obj, String.class);
-		assertThat(res, containsString("OK"));
-	}
-2、创建成功返回true
-	// 创建用户
-	 @Test
-	public void createAccount() {
-		Object obj = "{\"name\":\"zm1*cdhr\",\"ext1\":\"1\"}";
-		String res = restTemplate.postForObject("http://192.168.1.123:8082/account", obj, String.class);
-		assertThat(res, containsString("OK"));
-	}
-返回false不符合条件。
+    @Test
+	 	public void createAccount() {
+	 			Object obj = "{\"name\":\"zmcdhr\",\"ext1\":\"1\"}";
+	 		 	String res = restTemplate.postForObject("http://192.168.1.123:8082/account", obj, String.class);
+	 		 	assertThat(res, containsString("OK"));
+	 	}
+	 	创建成功返回true
+
+    @Test
+	 	public void createAccount() {
+	 			Object obj = "{\"name\":\"zm1*cdhr\",\"ext1\":\"1\"}";
+	 			String res = restTemplate.postForObject("http://192.168.1.123:8082/account", obj, String.class);
+	 			assertThat(res, containsString("OK"));
+		}
+		返回false不符合条件
 
 五、getAllAccount 获取所有用户信息
-// @Test
-	public void getAllAccount() {
-		String res = restTemplate.getForObject("http://192.168.1.123:8082/account", String.class);
-		assertThat(res, containsString("OK"));
-	}
+
+    @Test
+	 	public void getAllAccount() {
+	 			String res = restTemplate.getForObject("http://192.168.1.123:8082/account", String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
 
 六、deleteAccountByName 根据用户名删除用户
-正确返回true，
-错误返回false
 
 
-第二个Controller
 DbController
 一、新建数据库
-1、
-public void resetkey() {
-		Object obj = "{\"name\":\"test1\"}";
-		String res = restTemplate.postForObject("http://localhost:8082/db ", obj, String.class);
-		assertThat(res, containsString("OK"));
-	}
-true返回创建成功。
 
-2、查看数据库信息
-	public void updateAccessibityDelete() {
-//		Object obj = "{access_time:1}";
-		String res = restTemplate.getForObject("http://192.168.1.123:8082/db ",
-				String.class);
-		assertThat(res, containsString("OK"));
-	}
-查看数据库信息，
+    @Test
+	 	public void createDb() {
+	 			Object obj = "{\"name\":\"test1\"}";
+	 			String res = restTemplate.postForObject("http://localhost:8082/db ", obj, String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	true返回创建成功
+
+二、查看数据库信息
+
+    @Test
+	 	public void updateAccessibityDelete() {
+	 			Object obj = "{access_time:1}";
+	 			String res = restTemplate.getForObject("http://192.168.1.123:8082/db ",String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	查看数据库信息
 
 
-
-第三个Controller
 TableController：
-一、	根据id查看table信息
 
-public void getTableInfoById() {
-		 Object obj = "";
-		 String res = restTemplate.postForObject(baseUri + "/table/tableId_1", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
+一、根据id查看table信息
 
-没有table返回false
- 
-public void getTableInfoById() {
-		 Object obj = "";
-		 String res = restTemplate.postForObject(baseUri + "/table/tableId_13", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
- 
-True返回table信息
+    @Test
+	 	public void getTableInfoById() {
+	 			String res = restTemplate.getForObject(baseUri + "/table/tableId_1", String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	没有table返回false
 
-二、	根据表名获取表信息
+    @Test
+	 	public void getTableInfoById() {
+	 			Object obj = "";
+	 			String res = restTemplate.postForObject(baseUri + "/table/tableId_13", obj, String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	True返回table信息
 
-public void getTableInfoById() {
-		 Object obj = "";
-		 String res = restTemplate.getForObject(baseUri + "/table/test", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-有表名返回true
+二、根据表名获取表信息
 
-public void getTableInfoById() {
-		 Object obj = "";
-		 String res = restTemplate.getForObject(baseUri + "/table/testx", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-没有表名返回Empty value
+    @Test
+	 	public void getTableInfoById() {
+	 		 	Object obj = "";
+	 		 	String res = restTemplate.getForObject(baseUri + "/table/test", obj, String.class);
+	 		 	assertThat(res, containsString("OK"));
+	 	}
+	 	有表名返回true
+
+    @Test
+	 	public void getTableInfoById() {
+	 		 	Object obj = "";
+	 		 	String res = restTemplate.getForObject(baseUri + "/table/testx", obj, String.class);
+	 		 	assertThat(res, containsString("OK"));
+	 	}
+	 	没有表名返回Empty value
 
 三、	新增表信息
 
-public void getTableInfoById() {
-		 Object obj = "{tableName:test,fieldsInfo:asdlfj,accountname:administr1ator}";
-		 String res = restTemplate.postForObject(baseUri + "/table/tableId_13", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-返回false 用户不存在
+    @Test
+	 	public void getTableInfoById() {
+	 		 	Object obj = "{tableName:test,fieldsInfo:asdlfj,accountname:administr1ator}";
+	 		 	String res = restTemplate.postForObject(baseUri + "/table/tableId_13", obj, String.class);
+	 		 	assertThat(res, containsString("OK"));
+	 	}
+	 	返回false 用户不存在
 
-public void getTableInfoById() {
-		 Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
-		 String res = restTemplate.postForObject(baseUri + "/table/tableId_13", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-添加成功。
+    @Test
+	 	public void getTableInfoById() {
+	 		 	Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
+	 		 	String res = restTemplate.postForObject(baseUri + "/table/tableId_13", obj, String.class);
+	 		 	assertThat(res, containsString("OK"));
+	 	}
+	 	添加成功。
 
-四、	重置表状态
+四、重置表状态
 
-public void getTableInfoById() {
-		 Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
-		 String res = restTemplate.postForObject(baseUri + "/table/13/reset", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
+    @Test
+	 	public void getTableInfoById() {
+	 		 	Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
+	 		 	String res = restTemplate.postForObject(baseUri + "/table/13/reset", obj, String.class);
+	 		 	assertThat(res, containsString("OK"));
+	 	}
+	 	Reset-0可用
 
+    @Test
+	 	public void getTableInfoById() {
+	 			Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
+	 			String res = restTemplate.postForObject(baseUri + "/table/13/suspend", obj, String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	suspend-1暂缓
 
-
-Reset-0可用
-
-public void getTableInfoById() {
-		 Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
-		 String res = restTemplate.postForObject(baseUri + "/table/13/suspend", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-
-suspend-1暂缓
 
 public void getTableInfoById() {
 		 Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
