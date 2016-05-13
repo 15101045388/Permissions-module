@@ -1,68 +1,74 @@
 # Permissions-module
 ###用户权限模块
 ###模型：
-####用户表
-1、Account
-	private int id; 标识符
-	private String name; 用户名
-	private String appkey; 身份验证key
-	private String secretkey;
-	private int status; 
-	private String ext1; 前台用户id
-记录用户信息
+
+用户表
+
+    Account
+		private int id; 标识符
+		private String name; 用户名
+		private String appkey; 身份验证key
+		private String secretkey;
+		private int status; 
+		private String ext1; 前台用户id
+		记录用户信息
+
 
 接口表
-2、Interface
-	private int id;
-	private String title; 标题
-	private String description; 描述
-	private String address; 地址
-	private String method; 提交方法
-	private int ownerId; 创建者
-	private int tableId; 应用在那张表
-	private String createdTime; 创建时间
-	private int status; 是否可用
-	private String type; 类型
-	private String updateTime; 修改时间
-记录接口的详细信息
+
+    Interface
+		private int id;
+		private String title; 标题
+		private String description; 描述
+		private String address; 地址
+		private String method; 提交方法
+		private int ownerId; 创建者
+		private int tableId; 应用在那张表
+		private String createdTime; 创建时间
+		private int status; 是否可用
+		private String type; 类型
+		private String updateTime; 修改时间
+		记录接口的详细信息
 
 权限表
-3、Accessibities
-	private int id;
-	private int accountId; 用户id
-	private int interfaceId; 接口id
-	private String accessTime; 访问时间
-	private int status; 状态
-	private String createdTime; 创建时间
-	private String expiredAt; 过期时间
-	private String createdBy; 谁给谁创建
-	private String updateTime; 修改时间
-记录用户访问接口的权限
+
+    Accessibities
+		private int id;
+		private int accountId; 用户id
+		private int interfaceId; 接口id
+		private String accessTime; 访问时间
+		private int status; 状态
+		private String createdTime; 创建时间
+		private String expiredAt; 过期时间
+		private String createdBy; 谁给谁创建
+		private String updateTime; 修改时间
+		记录用户访问接口的权限
 
 表信息表
-4、TableInfo
-	private int id;
-	private int ownerId; 用户id
-	private String tableName; 表名称
-	private String fieldsInfo; 字段信息
-	private String createTime; 创建时间
-	private int status; 状态
-	private String updateTime; 修改时间
-记录创建的表的信息
+
+    TableInfo
+		private int id;
+		private int ownerId; 用户id
+		private String tableName; 表名称
+		private String fieldsInfo; 字段信息
+		private String createTime; 创建时间
+		private int status; 状态
+		private String updateTime; 修改时间
+		记录创建的表的信息
 
 数据库表
-5、DbInfo
-	private int id;
-	private int ownerId; 用户id
-	private String dbName; 数据库名称
-	private Date createTime; 创建时间
-	private int status; 状态
-记录创建的数据库的信息
+
+    DbInfo
+		private int id;
+		private int ownerId; 用户id
+		private String dbName; 数据库名称
+		private Date createTime; 创建时间
+		private int status; 状态
+		记录创建的数据库的信息
 
 Controller
 
-1、AccessibitiesController
-方法
+AccessibitiesController方法
 resetAccessibitiesStatus  重置权限状态
 getAccessibitiesByID 根据id查看权限
 deleteAccessibitiesStatus  删除权限
@@ -71,8 +77,7 @@ suspendAccessibitiesStatus 暂缓权限状态
 addAccessibities 新增一条权限
 getAccessibities 查看权限信息
 
-2、AccountController
-方法
+2、AccountController方法
 getAccountByName 根据用户名查看用户信息
 getAccountById 根据id获取用户信息
 resetKey 重置appkey、secretkey
@@ -80,13 +85,11 @@ createAccount 新建用户
 getAllAccount 获取所有用户信息
 deleteAccountByName 根据用户名删除用户
 
-3、DbController
-方法
+3、DbController方法
 created  创建数据库表
 getDbInfo 查看数据库信息
 
-4、InterfaceController
-方法
+4、InterfaceController方法
 checkInterface 判断访问接口是否有权限
 updateInterfaceById 根据id修改接口信息
 searchInterfaceByTable 根据表名称看接口信息
@@ -95,8 +98,7 @@ getInterfaceByID 根据id查看接口信息
 addInterface 新增接口
 deleteInterface 删除接口
 
-5、TableInfoController
-方法
+5、TableInfoController方法
 getTableInfoByName 根据表名查看表信息
 getTableInfoById 根据id查看表信息 
 suspendTableInfo修改表的状态成暂缓
@@ -107,20 +109,20 @@ deleteTableInfo 删除表信息
 测试用例：
 AccountController：
 一、getAccountByName 根据用户名查看用户信息
-	//判断用户是否存在
-		1、 @Test
-	 public void getAccessibitiesById() {
-	   		String res = restTemplate.getForObject("http://192.168.1.123:8082/account/Administrator", String.class);
-				assertThat(res, containsString("OK"));
-    }
-存在Administrator返回true
 
-	2、 @Test
-	 public void getAccountByName1() {
-		 String res = restTemplate.getForObject("http://192.168.1.123:8082/account/zhangsan", String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-不存在zhangsan返回false
+    @Test
+	 	public void getAccessibitiesById() {
+	   		String res = restTemplate.getForObject("http://192.168.1.123:8082/account/Administrator", String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	存在Administrator返回true
+
+    @Test
+	 	public void getAccountByName1() {
+	 			String res = restTemplate.getForObject("http://192.168.1.123:8082/account/zhangsan", String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	不存在zhangsan返回false
 
 	3、 @Test
 	 public void getAccountByName1() {
