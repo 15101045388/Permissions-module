@@ -283,246 +283,249 @@ TableController：
 	 	}
 	 	suspend-1暂缓
 
-
-public void getTableInfoById() {
-		 Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
-		 String res = restTemplate.postForObject(baseUri + "/table/13/delete", obj, String.class);
-		 assertThat(res, containsString("OK"));
-	 }
-
-返回true修改成功，返回false修改的表为空
-delete-2不可用
+    @Test
+	 	public void getTableInfoById() {
+	 			Object obj = "{tableName:tes2t,fieldsInfo:asdlfj,accountname:zhangsan}";
+	 			String res = restTemplate.postForObject(baseUri + "/table/13/delete", obj, String.class);
+	 			assertThat(res, containsString("OK"));
+	 	}
+	 	返回true修改成功，返回false修改的表为空
+	 	delete-2不可用
 
 
 第四个Controller
 accessibityController
 一、	新增权限
-public void addAccessibities() {
-		 Object obj = "{ accessTime:1,accountName:ads,interfaceId:1,status:0}";
-		 String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-添加成功返回true
-public void addAccessibities() {
-		 Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-添加失败
+
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ accessTime:1,accountName:ads,interfaceId:1,status:0}";
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	添加成功返回true
+
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	添加失败
+	 	
 1、	用户不存在
 
-public void addAccessibities() {
-		 Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
 
 2、	Address不存在
 
-public void addAccessibities() {
-		 Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
 
 3、	状态错误
 
 二、根据id查看权限
-public void addAccessibities() {
-		 Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/accessibities /accessibitiesId_1", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-true返回权限信息
 
-public void addAccessibities() {
-		 Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/accessibities /accessibitiesId_1", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities /accessibitiesId_1", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	true返回权限信息
+
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities /accessibitiesId_1", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
 没有返回false
 
 二、	查看所有权信息
 
-public void addAccessibities() {
-		 String res = restTemplate.getForObject(baseUri + "/accessibities ", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-有数据返回权限信息，没有数据返回空。
+    @Test
+	 	public void addAccessibities() {
+	 			String res = restTemplate.getForObject(baseUri + "/accessibities ", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	有数据返回权限信息，没有数据返回空。
 
 三、	修改权限状态
 
-
 修改权限状态
 
-public void addAccessibities() {
-		 Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/accessibities /13/reset", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-Reset-0可用
-public void addAccessibities() {
-		  
-		 String res = restTemplate.postForObject(baseUri + "/accessibities /13/suspend", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-suspend-1暂缓
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ accessTime:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities /13/reset", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	Reset-0可用
 
-public void addAccessibities() {
-			 String res = restTemplate.postForObject(baseUri + "/accessibities /13/delete", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-delete-2不可用
+    @Test
+	 	public void addAccessibities() {
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities /13/suspend", obj, String.class);
+	 		 	assertThat(res, containsString("FAIL"));
+	 	}
+	 	suspend-1暂缓
+
+    @Test
+	 	public void addAccessibities() {
+	 			String res = restTemplate.postForObject(baseUri + "/accessibities /13/delete", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	delete-2不可用
 
 第五个controller
 
 InterfaceController
-
 一、查看interface是否有权限
-	public void checkInterface() {
-		String res = restTemplate.getForObject(baseUri + "/interface/check?n=zhangsan&a=/add/as&m=GET",
-				String.class);
-		assertThat(res, containsString("OK"));// 显示表中字段，没有ok，测试错误。
-	}
-返回true 有权限访问这个interface
-一、查看interface是否有权限
-	public void checkInterface() {
-		String res = restTemplate.getForObject(baseUri + "/interface/check?n=zhangsan&a=/add/adddds&m=GET",
-				String.class);
-		assertThat(res, containsString("OK"));// 显示表中字段，没有ok，测试错误。
-	}
 
-没有这个接口 无权限
+    @Test
+	 	public void checkInterface() {
+	 			String res = restTemplate.getForObject(baseUri + "/interface/check?n=zhangsan&a=/add/as&m=GET",String.class);
+	 			assertThat(res, containsString("OK"));// 显示表中字段，没有ok，测试错误。
+	 	}
+	 	返回true 有权限访问这个interface
+	 	
+    @Test
+	 	public void checkInterface() {
+	 			String res = restTemplate.getForObject(baseUri + "/interface/check?n=zhangsan&a=/add/adddds&m=GET",String.class);
+	 			assertThat(res, containsString("OK"));// 显示表中字段，没有ok，测试错误。
+	 	}
+	 	没有这个接口权限 无权限
 
 二、新增addInterface
 
-public void addAccessibities() {
-		 Object obj = "{ address:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ address:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	True新增成功
 
-True新增成功
-
-public void addAccessibities() {
-		 Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-返回错误
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+		返回错误
 1、	状态不符合
 
-
-public void addAccessibities() {
-		 Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-返回错误
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	返回错误
 
 2、	参数不合法
 
-
-
-public void addAccessibities() {
-		 Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-返回错误
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	返回错误
 
 3、	accountName 不存在
 
-
-public void addAccessibities() {
-		 Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
-		 String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-返回错误
-
-4、	tableName不存在
-
+    @Test
+	 	public void addAccessibities() {
+	 			Object obj = "{ tableName:121,accountName:a2ds,interfaceId:1ds,status:10}";
+	 			String res = restTemplate.postForObject(baseUri + "/ interfaceId ", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	返回错误
 
 四、	根据id查看接口
 
-public void getInterfaceByID () {
-		 Object obj = "{ address:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.getForObject(baseUri + "/interfaceId_14", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-True 返回接口信息
-
-public void getInterfaceByID () {
-		 Object obj = "{ address:1,accountName:a2ds,interfaceId:1,status:10}";
-		 String res = restTemplate.getForObject(baseUri + "/interfaceId_143", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-False 没有接口信息返回空
+    @Test
+	 	public void getInterfaceByID () {
+	 			Object obj = "{ address:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.getForObject(baseUri + "/interfaceId_14", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+		True 返回接口信息
+		
+    @Test
+	 	public void getInterfaceByID () {
+	 			Object obj = "{ address:1,accountName:a2ds,interfaceId:1,status:10}";
+	 			String res = restTemplate.getForObject(baseUri + "/interfaceId_143", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	False 没有接口信息返回空
 
 五、	获取所有接口信息
 
-public void getInterface() {
-		 String res = restTemplate.getForObject(baseUri + "/interface", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-True查看所有用户信息，没有返回空
-
+    @Test
+	 	public void getInterface() {
+	 			String res = restTemplate.getForObject(baseUri + "/interface", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	True查看所有用户信息，没有返回空
 
 六、	修改接口信息
 
-public void getInterfaceByID () {
-		 Object obj = "{ address:1,tableName:a2ds,status:1,type:10,title:10,description:10}";
-		 String res = restTemplate.getForObject(baseUri + "/interfaceId_143", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
+    @Test
+	 	public void getInterfaceByID () {
+	 			Object obj = "{ address:1,tableName:a2ds,status:1,type:10,title:10,description:10}";
+	 			String res = restTemplate.getForObject(baseUri + "/interfaceId_143", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	成功true
 
-成功true
-
-
-public void getInterfaceByID () {
-		 Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
-		 String res = restTemplate.postForObject(baseUri + "/interfaceId_143", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-
-False
+    @Test
+	 	public void getInterfaceByID () {
+	 			Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
+	 			String res = restTemplate.postForObject(baseUri + "/interfaceId_143", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	False
+	 	
 1、	状态错误
 
-public void getInterfaceByID () {
-		 Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
-		 String res = restTemplate.postForObject(baseUri + "/interfaceId_143", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-
-返回错误
+    @Test
+	 	public void getInterfaceByID () {
+	 			Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
+	 			String res = restTemplate.postForObject(baseUri + "/interfaceId_143", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	返回错误
+	 	
 2、	没有接口信息
 
-
-public void getInterfaceByID () {
-		 Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
-		 String res = restTemplate.postForObject(baseUri + "/interfaceId_143", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-返回错误
-
-3、	没有表信息
-
-
-
-删除接口
-
-True返回删除成功，false失败
+    @Test
+	 	public void getInterfaceByID () {
+	 			Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
+	 			String res = restTemplate.postForObject(baseUri + "/interfaceId_143", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	返回错误
 
 
 根据表名称查看下面的接口信息
 
-public void getInterfaceByID () {
-		 Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
-		 String res = restTemplate.getForObject(baseUri + "/interfaceId_143", obj, String.class);
-		 assertThat(res, containsString("FAIL"));
-	 }
-
-有数据显示所有表的接口 
+    @Test
+	 	public void getInterfaceByID () {
+	 			Object obj = "{ address:1dd22,tableName:a2asdfds,status:d1,type:1d0,title:1d0,description:d10}";
+	 			String res = restTemplate.getForObject(baseUri + "/interfaceId_143", obj, String.class);
+	 			assertThat(res, containsString("FAIL"));
+	 	}
+	 	有数据显示所有表的接口 
 
 
